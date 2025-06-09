@@ -1,0 +1,5 @@
+
+class EmptyText(BaseException):
+    pass
+
+

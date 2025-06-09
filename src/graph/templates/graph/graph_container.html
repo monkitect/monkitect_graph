@@ -1,0 +1,42 @@
+<div id="mynetwork" style="width: 100%; height: 500px;"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet"/>
+
+{{ graph.nodes|json_script:"nodes" }}
+{{ graph.edges|json_script:"edges" }}
+<script type="text/javascript">
+    // 从外部传入的 JSON 字符串转换为对象
+    const nodeNames = JSON.parse(document.getElementById('nodes').textContent);
+    const edgePairs = JSON.parse(document.getElementById('edges').textContent);
+
+    const nodes = new vis.DataSet(
+        nodeNames.map(name => ({id: name, label: name}))
+    );
+
+    const edges = new vis.DataSet(
+        edgePairs.map(pair => ({from: pair[0], to: pair[1]}))
+    );
+
+    const container = document.getElementById("mynetwork");
+    const data = {nodes, edges};
+
+    const options = {
+        layout: {improvedLayout: true},
+        physics: {
+            solver: 'repulsion',
+            enabled: true
+        },
+        interaction: {
+            hover: true
+        },
+        nodes: {
+            shape: "dot",
+            size: 20,
+            font: {size: 16}
+        }
+    };
+
+    const network = new vis.Network(container, data, options);
+    network.once("afterDrawing", () => network.fit());
+</script>

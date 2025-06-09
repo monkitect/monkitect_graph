@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>Graph Builder</title>
+</head>
+<body>
+<h1>Text to Graph</h1>
+<form method="post">
+    {% csrf_token %}
+    <textarea name="text" rows="10" cols="80" placeholder="Enter text here...">{{ text|default:'' }}</textarea><br>
+    <button type="submit">Build Graph</button>
+</form>
+
+{% if graph %}
+<h2>Graph Output</h2>
+{% include "graph/graph_container.html" with graph=graph %}
+{% endif %}
+</body>
+</html>
