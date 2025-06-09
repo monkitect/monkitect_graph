@@ -35,7 +35,7 @@ python manage.py createsuperuser
 ref: https://docs.djangoproject.com/en/4.2/intro/tutorial02/
 
 ```commandline
-python manage.py startapp videoeditor
+python manage.py startapp graph
 ```
 
 ```commandline
