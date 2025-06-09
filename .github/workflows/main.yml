@@ -80,7 +80,7 @@ jobs:
       - name: Health check
         run: |
           sleep 10  # Wait for the server to start
-          curl --fail -w "%{http_code}" -sS -o /dev/stderr https://graph_int.monkitect.com/healthy/ || exit 1
+          curl --fail -w "%{http_code}" -sS -o /dev/stderr https://graph-int.monkitect.com/healthy/ || exit 1
 
   approve_deploy_prod:
     needs: [ test_int ]
