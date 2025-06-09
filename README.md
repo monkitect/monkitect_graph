@@ -4,7 +4,7 @@
 
 ```commandline
 docker build -t monkitect_graph -f docker/Dockerfile .
-docker run --rm -it --name monkitect_graph -p 4503:4503 -v .\src:/code -v .\logs:/logs -v E:\baiyigali\datasets:/dataset --env-file .env monkitect_graph bash
+docker run --rm -it --name monkitect_graph -p 4500:4500 -v .\src:/code -v .\logs:/logs --env-file .env monkitect_graph bash
 docker exec -it monkitect_graph bash
 ```
 
@@ -21,7 +21,7 @@ django-admin startproject app src
 ## start project
 
 ```commandline
-python manage.py runserver 0.0.0.0:4503
+python manage.py runserver 0.0.0.0:4500
 ```
 
 ## enable admin (Optional)
