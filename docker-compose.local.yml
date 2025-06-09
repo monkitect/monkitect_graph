@@ -1,0 +1,37 @@
+version: "3.3"
+services:
+  monkitect_graph_nginx:
+    image: nginx:1.21.5
+    container_name: monkitect_graph_nginx
+    restart: always
+    ports:
+      - 4503:80
+    privileged: true
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites-enabled/:/etc/nginx/sites-enabled/
+      - ./nginx/resources/:/code/resources/
+      - ./static:/code/static
+      - ./media:/code/media
+    depends_on:
+      - monkitect_graph
+
+  monkitect_graph:
+    image: monkitect_graph
+    build: .
+    container_name: monkitect_graph
+    environment:
+      - DEBUG=1
+      - DB_HOST=tumen-int.mysql.rds.aliyuncs.com
+      - DB_NAME=tools-int
+      - DB_USER=db_readwrite
+      - DB_PASSWORD=baigal123!
+      - REDIS_HOST=redis-turing-int.redis.rds.aliyuncs.com
+      - REDIS_USER=redis_readwrite
+      - REDIS_PASSWORD=baigal123!
+      - image_search_base_url=http://122.9.147.122:4504
+    volumes:
+      - ./src:/code/
+    restart: always
+    command: python -u manage.py runserver 0.0.0.0:80
+    shm_size: 1gb

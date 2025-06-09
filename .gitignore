@@ -1,0 +1,15 @@
+.idea
+.Trash-0
+*.mp4
+*.mp3
+*.ttf
+*.ttc
+*.ipynb
+src/static
+*.sqlite3
+__pycache__
+projects
+tests
+data
+logs
+tmp

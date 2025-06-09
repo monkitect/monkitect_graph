@@ -1,0 +1,23 @@
+server {
+    listen 80 default_server;
+    client_max_body_size 10m;
+
+    server_name _;
+
+     location ~ .*\.(js|css|ttf|jpg|png|svg|ico|woff|csv)$ {
+         root /code/;
+     }
+
+     location ~ .*\.(txt|html)$ {
+         root /code/resources/;
+     }
+
+    location / {
+        proxy_pass http://monkitect_graph:80/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-NginX-Proxy true;
+        proxy_read_timeout 600;
+    }
+}
