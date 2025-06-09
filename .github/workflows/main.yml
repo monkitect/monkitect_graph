@@ -20,7 +20,7 @@ env:
 jobs:
   build:
     name: build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
@@ -37,7 +37,7 @@ jobs:
   deploy_int:
     needs: [ build ]
     name: deploy_int
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     env:
       SERVER_IP: ${{ vars.SERVER_IP }}
       DB_HOST: ${{ vars.DB_HOST }}
@@ -79,7 +79,7 @@ jobs:
             docker compose up -d
   test_int:
     needs: [ deploy_int ]
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Health check
         run: |
@@ -89,7 +89,7 @@ jobs:
   approve_deploy_prod:
     needs: [ test_int ]
     name: approve_deploy_prod
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     permissions:
       issues: write
     steps:
@@ -108,7 +108,7 @@ jobs:
   deploy_prod:
     needs: [ approve_deploy_prod ]
     name: deploy_prod
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     env:
       SERVER_IP: ${{ vars.SERVER_IP_PROD }}
       DB_HOST: ${{ vars.DB_HOST_PROD }}
@@ -150,7 +150,7 @@ jobs:
             docker compose up -d
   test_prod:
     needs: [ deploy_prod ]
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Health check
         run: |
