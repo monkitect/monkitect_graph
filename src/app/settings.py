@@ -29,6 +29,8 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:4500',
     'http://graph-int.monkitect.com',
     'https://graph-int.monkitect.com',
+    'http://graph.monkitect.com',
+    'https://graph.monkitect.com',
 ]
 
 # Application definition
